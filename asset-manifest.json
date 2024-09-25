@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/frontend-app/static/css/main.372e13e2.css",
-    "main.js": "/frontend-app/static/js/main.5f7c3af0.js",
+    "main.js": "/frontend-app/static/js/main.cc936c16.js",
     "static/js/699.8f9e0a12.chunk.js": "/frontend-app/static/js/699.8f9e0a12.chunk.js",
     "static/js/453.9f012a92.chunk.js": "/frontend-app/static/js/453.9f012a92.chunk.js",
     "static/media/Satoshi-MediumItalic.ttf": "/frontend-app/static/media/Satoshi-MediumItalic.5db9ec801a311bdf187b.ttf",
@@ -44,12 +44,12 @@
     "index.html": "/frontend-app/index.html",
     "static/media/icon-arrow-down.svg": "/frontend-app/static/media/icon-arrow-down.8cf702fed2b2350dae1b.svg",
     "main.372e13e2.css.map": "/frontend-app/static/css/main.372e13e2.css.map",
-    "main.5f7c3af0.js.map": "/frontend-app/static/js/main.5f7c3af0.js.map",
+    "main.cc936c16.js.map": "/frontend-app/static/js/main.cc936c16.js.map",
     "699.8f9e0a12.chunk.js.map": "/frontend-app/static/js/699.8f9e0a12.chunk.js.map",
     "453.9f012a92.chunk.js.map": "/frontend-app/static/js/453.9f012a92.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.372e13e2.css",
-    "static/js/main.5f7c3af0.js"
+    "static/js/main.cc936c16.js"
   ]
 }
