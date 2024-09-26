@@ -5,7 +5,7 @@ const TableTwo = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch('http://35.153.180.37:5000/api/users').then((response) => {
+    fetch('https://susmapathak.site/api/users').then((response) => {
       return response.json();
     }).then((res)=>{
       setUsers(res);
