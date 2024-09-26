@@ -11,27 +11,31 @@ const SignUp = () => {
 
   function handleSubmit(event){
     event.preventDefault();
+    let formValid = true
 
     if (user.password !== user.password_conformation) {
       setError('password conformation mismatch');
+      formValid = false
     }
 
-    fetch('http://localhost:5000/api/auth/register',{
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    }).then((res) => {
-      return res.json()
-    }).then((res) => {
-      if (res.error) {
-        toast.error(res.error)
-      }else{
-        toast.success("You have registered successfully");
-        navigate('/auth/signin');
-      }
-    })
+    if (formValid) {
+      fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      }).then((res) => {
+        return res.json()
+      }).then((res) => {
+        if (res.error) {
+          toast.error(res.error)
+        } else {
+          toast.success("You have registered successfully");
+          navigate('/auth/signin');
+        }
+      })
+    }
   }
 
   function handleChange(e){
@@ -307,6 +311,7 @@ const SignUp = () => {
                       type="password"
                       placeholder="Re-enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      onChange={handleChange}
                       name="password_conformation"
                     />
 
