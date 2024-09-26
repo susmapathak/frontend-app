@@ -1,8 +1,49 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
+  const [user, setUser] = useState({name:'', email:'', password:'', password_conformation:''});
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  function handleSubmit(event){
+    event.preventDefault();
+
+    if (user.password !== user.password_conformation) {
+      setError('password conformation mismatch');
+    }
+
+    fetch('http://localhost:5000/api/auth/register',{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    }).then((res) => {
+      return res.json()
+    }).then((res) => {
+      if (res.error) {
+        toast.error(res.error)
+      }else{
+        toast.success("You have registered successfully");
+        navigate('/auth/signin');
+      }
+    })
+  }
+
+  function handleChange(e){
+    let name = e.target.name;
+    let value = e.target.value;
+    let copiedUser = {...user}
+    copiedUser[name] = value;
+    setUser(copiedUser);
+
+
+  }
+
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -147,10 +188,10 @@ const SignUp = () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign Up to TailAdmin
+                Sign Up to Admin
               </h2>
 
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Name
@@ -160,6 +201,8 @@ const SignUp = () => {
                       type="text"
                       placeholder="Enter your full name"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      onChange={handleChange}
+                      name="name"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -195,6 +238,8 @@ const SignUp = () => {
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      onChange={handleChange}
+                      name="email"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -226,6 +271,8 @@ const SignUp = () => {
                       type="password"
                       placeholder="Enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      onChange={handleChange}
+                      name="password"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -261,6 +308,7 @@ const SignUp = () => {
                       type="password"
                       placeholder="Re-enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      name="password_conformation"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -285,6 +333,7 @@ const SignUp = () => {
                       </svg>
                     </span>
                   </div>
+                  <span>{error}</span>
                 </div>
 
                 <div className="mb-5">
@@ -295,7 +344,7 @@ const SignUp = () => {
                   />
                 </div>
 
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+                <button type="submit" className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
                   <span>
                     <svg
                       width="20"

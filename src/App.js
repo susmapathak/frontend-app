@@ -1,7 +1,7 @@
 import './App.css';
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 // import ECommerce from './pages/Dashboard/ECommerce';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
@@ -22,11 +22,11 @@ function App() {
     <Loader />
   ) : (
     <>
-      {/* <Toaster
+      <Toaster
         position="top-right"
         reverseOrder={false}
         containerClassName="overflow-auto"
-      /> */}
+      />
       <Routes>
         <Route path="/auth/signin" element={<SignIn />} />
         <Route path="/auth/signup" element={<SignUp />} />
