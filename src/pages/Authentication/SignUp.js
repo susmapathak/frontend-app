@@ -8,6 +8,13 @@ const SignUp = () => {
   const [user, setUser] = useState({name:'', email:'', password:'', password_conformation:''});
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  let API_BASE_URL = '';
+
+  if (process.env.NODE_ENV === 'development') {
+    API_BASE_URL ='http://localhost:5000'
+  }else{
+    API_BASE_URL ='https://susmapathak.site'
+  }
 
   function handleSubmit(event){
     event.preventDefault();
@@ -19,7 +26,7 @@ const SignUp = () => {
     }
 
     if (formValid) {
-      fetch('http://localhost:5000/api/auth/register', {
+      fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
